@@ -82,8 +82,6 @@ configure(listOf(project("infrastructure"))) {
 }
 
 configure(listOf(project("application"))) {
-    apply(plugin = "org.jetbrains.kotlin.plugin.spring")
-
     dependencies {
         implementation("org.springframework.security:spring-security-core")
         implementation("org.springframework:spring-tx")
