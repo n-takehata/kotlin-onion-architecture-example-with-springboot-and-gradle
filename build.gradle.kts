@@ -18,17 +18,10 @@ allprojects {
     }
 
     apply(plugin = "kotlin")
-    apply(plugin = "org.jetbrains.kotlin.plugin.spring")
-    apply(plugin = "org.springframework.boot")
-    apply(plugin = "io.spring.dependency-management")
 
     dependencies {
         implementation("org.jetbrains.kotlin:kotlin-reflect")
         implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-        implementation("org.springframework.boot:spring-boot-starter-web")
-        testImplementation("org.springframework.boot:spring-boot-starter-test") {
-            exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
-        }
         testImplementation("org.junit.jupiter:junit-jupiter:5.7.2")
         testImplementation("org.assertj:assertj-core:3.20.2")
         testImplementation("org.mockito:mockito-core:3.11.2")
@@ -48,7 +41,15 @@ allprojects {
 }
 
 configure(listOf(project("presentation"))) {
+    apply(plugin = "org.jetbrains.kotlin.plugin.spring")
+    apply(plugin = "org.springframework.boot")
+    apply(plugin = "io.spring.dependency-management")
+
     dependencies {
+        implementation("org.springframework.boot:spring-boot-starter-web")
+        testImplementation("org.springframework.boot:spring-boot-starter-test") {
+            exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
+        }
         implementation("org.springframework.boot:spring-boot-starter-security")
         implementation("org.springframework.boot:spring-boot-starter-aop")
         implementation("org.springframework.boot:spring-boot-starter-data-redis")
@@ -82,9 +83,11 @@ configure(listOf(project("infrastructure"))) {
 }
 
 configure(listOf(project("application"))) {
+    apply(plugin = "org.jetbrains.kotlin.plugin.spring")
+
     dependencies {
-        implementation("org.springframework.security:spring-security-core")
-        implementation("org.springframework:spring-tx")
+        implementation("org.springframework.security:spring-security-core:5.5.1")
+        implementation("org.springframework:spring-tx:5.3.8")
         implementation(project(":domain"))
     }
 }
