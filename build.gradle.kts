@@ -58,7 +58,7 @@ configure(listOf(project("presentation"))) {
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
         implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.12.3")
         testImplementation("org.springframework.security:spring-security-test")
-        implementation(project(":infrastructure"))
+        runtimeOnly(project(":infrastructure"))
         implementation(project(":application"))
         implementation(project(":domain"))
     }
